@@ -1,0 +1,44 @@
+<!-- This is the layout file & fragments of this file will be used in other files -->
+
+<html xmlns:th="http://thymeleaf.org">
+<!-- xmlns stands for xml namespace & the namespace defined is 'http://thymeleaf.org'.
+What significance does this namespace play?
+It signifies that you can use the tags only which are defined in the defined namespace.
+-->
+<body>
+<!-- Here a fragment is defined
+Format is th(stands for thymeleaf):fragment = "fragment_name" .
+This fragment contains basic implementation about css & as of now you need not to worry about the implementation of css
+-->
+
+<head th:fragment="site-head">
+    <link rel="stylesheet" href="../public/css/styles.css"
+          th:href="@{css/styles.css}" />
+</head>
+<!-- Here a fragment named 'logged-in' is defined -->
+<header th:fragment="logged-in" th:remove="tag">
+    <header>
+        <a href="posts.html" th:href="@{posts}">Posts</a>
+        <!-- th:href="@{posts}" overwrites href="posts.html" & maps to a method mapped with "/posts" in the controller class-->
+
+        <a href="posts/create.html" th:href="@{/posts/create}">Create Post</a>
+        <!-- th:href="@{posts/create}" overwrites href="posts/create.html" & maps to a method mapped with "/posts/create" in the controller class-->
+    </header>
+</header>
+
+<!-- This is the definition of a fragment named 'logged-out'.
+In this fragment
+th:href="@{/users/login} overwrites the relative link href="users/login.html" & as a result Dispatcher Servlet looks for a method mapped with @RequestMapping("/users/login") in controller class(UserController).
+Similarly, th:href="@{/users/register} overwrites the relative link href="users/register.html" & as a result Dispatcher Servlet looks for a method mapped with @RequestMapping("/users/register") in controller class(UserController).
+-->
+
+<header th:fragment="logged-out" th:remove="tag">
+    <header>
+        <a href="users/login.html" th:href="@{/users/login}">Login</a>
+        <a href="users/register.html" th:href="@{/users/register}">Registration</a>
+
+    </header>
+</header>
+
+</body>
+</html>
